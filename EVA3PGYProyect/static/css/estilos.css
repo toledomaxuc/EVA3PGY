@@ -14,7 +14,7 @@ header{
     position: absolute;
     top: 0;
     left: 0;
-    background: #fff;
+    background: rgb(210, 228, 245);
 }
 
 /*HEADER SUPERIOR*/
@@ -88,7 +88,7 @@ nav > ul > li > a{
     display: flex;
     align-items: center;
     padding: 14px;
-    color: white;
+    color: rgb(210, 228, 245);
     text-transform: uppercase;
     font-size: 14px;
     transition: all 300ms ease;
@@ -112,7 +112,7 @@ nav ul li ul{
     width: 200px;
     display: flex;
     flex-direction: column;
-    background: #fff;
+    background: rgb(210, 228, 245);
     position: absolute;
     top: 90px;
     left: -5px;
@@ -135,7 +135,7 @@ nav ul li ul:before{
     height: 0;
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;
-    border-bottom: 12px solid white;
+    border-bottom: 12px solid rgb(210, 228, 245);
     position: absolute;
     top: -12px;
     left: 20px;
@@ -154,7 +154,7 @@ nav ul li ul li a{
 
 nav ul li ul li a:hover{
     background: #0074c7;
-    color: #fff;
+    color: rgb(210, 228, 245);
     transform: scale(1.1);
     padding-left: 30px;
     font-size: 14px;
@@ -164,7 +164,7 @@ nav ul li ul li a:hover{
 /*ARTICULOS*/
 
     main{
-        background: #f0f0f0;
+        background: rgb(210, 228, 245);
         padding: 40px 20px;
         margin-top: 194px;
     }
@@ -172,7 +172,7 @@ nav ul li ul li a:hover{
         max-width: 1200px;
         margin: 20px auto;
         padding: 40px ;
-        background: #fff;
+        background: rgb(210, 228, 245);
     }
     article p {
         margin-top: 20px;
@@ -184,7 +184,7 @@ nav ul li ul li a:hover{
 
     .icon__menu{
         font-size: 26px;
-        color: white;
+        color: rgb(210, 228, 245);
         cursor: pointer;
         width: 26px;
         height: 100%;
@@ -287,3 +287,14 @@ aside#der{
     
 }
 
+.container {
+  background-color: rgb(210, 228, 245); /* Cambia el color de fondo */
+}
+
+.header {
+  background-color: rgb(210, 228, 245); /* Cambia el color de fondo del encabezado */
+}
+
+.header__superior {
+  color: #333333; /* Cambia el color del texto del encabezado */
+}

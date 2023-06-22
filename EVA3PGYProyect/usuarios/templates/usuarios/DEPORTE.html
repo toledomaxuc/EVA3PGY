@@ -8,15 +8,12 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="{% static 'css/estilosn.css' %}">
-	<link rel="stylesheet" href="{% static 'css/estilos.css'%}">
+	<link rel="stylesheet" href="{% static 'css/estilosm.css' %}">
 </head>
 
 <body>
 	<div class="container__menu">
-
 		<div class="menu">
-
 			<input type="checkbox" id="check__menu">
 			<label id="#label__check" for="check__menu">
 				<i class="fa-solid fa-bars icon__menu"></i>
@@ -42,8 +39,8 @@
 							<li><a href="{% url 'POLITICA' %}">José Wilson</a></li>
 							<li><a href="{% url 'DEPORTE' %}">César Vásquez</a></li>
 						</ul>
+					</li>
 					<li><a href="{% url 'Formulario' %}">Contactanos</a></li>
-
 				</ul>
 			</nav>
 		</div>
@@ -53,7 +50,7 @@
 			<div class="col-md-8">
 				<h1>Manchester City y Bayern Múnich animan un partidazo en la Champions League</h1>
 				<h6>Autor: César Vásquez</h6>
-				<h6>Fecha y ubicación: 10/04/2023 , Santiago de Chile</h6>
+				<h6>Fecha y ubicación: 10/04/2023, Santiago de Chile</h6>
 				<h6>Categoría: Deportes</h6>
 				<p>Una nueva semana de UEFA Champions League comienza con la disputa de los cuartos de final. Por el
 					duelo de ida, Manchester City recibe a Bayern Múnich en lo que promete ser un partidazo.</p>
@@ -65,25 +62,19 @@
 					<div class="col-md-6">
 						<img src="https://library.sportingnews.com/styles/crop_style_16_9_mobile_2x/s3/2023-04/nba-canada--3f300ffc-9748-4efa-a8c2-11571ed477fa.png?h=920929c4&itok=wWrSZ2sJ"
 							class="img-fluid" alt="Imagen 2" width="400px" height="300px">
-						<h4> Clasico de Champions</h4>
+						<h4>Clásico de Champions</h4>
 					</div>
-					<h1>Una final anticipada</h1>
-					<p>En cuartos de final ya no quedan rivales débiles y el duelo que protagoniza Manchester City ante
-						Bayern Múnich bien pudo ser la definición por el título, por el gran nivel que tienen ambos
-						equipos
-						y la calidad de jugadores que hay en cada plantel.
-
-						Los Citizens están en el 2° lugar de la Premier League, a 6 puntos del líder Arsenal. Sin
-						embargo,
-						los dirigidos por Pep Guardiola tienen un duelo pendiente y a fin de mes enfrentan a los propios
-						Gunners, por lo que dependen se sí para poder ser los campeones del fútbol inglés. Erling
-						Haaland
-						llegan en un gran momento a la Champions, trofeo que se ha negado a unirse a sus vitrinas.</p>
-
 				</div>
+				<h2>Una final anticipada</h2>
+				<p>En los cuartos de final ya no quedan rivales débiles y el duelo que protagoniza Manchester City ante
+					Bayern Múnich bien pudo ser la definición por el título, por el gran nivel que tienen ambos equipos
+					y la calidad de jugadores que hay en cada plantel.</p>
+				<p>Los Citizens están en el 2° lugar de la Premier League, a 6 puntos del líder Arsenal. Sin embargo,
+					los dirigidos por Pep Guardiola tienen un duelo pendiente y a fin de mes enfrentan a los propios
+					Gunners, por lo que dependen de sí mismos para poder ser los campeones del fútbol inglés. Erling
+					Haaland llega en un gran momento a la Champions, trofeo que se ha negado a unirse a sus vitrinas.</p>
 			</div>
 			<div class="col-md-4">
-
 				<h4>Te puede interesar:</h4>
 				<ul>
 					<li><a href="{% url 'index' %}">Volver al inicio</a></li>
@@ -95,6 +86,4 @@
 	</div>
 </body>
 
-
 </html>
-

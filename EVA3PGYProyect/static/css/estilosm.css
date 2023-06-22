@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital@1&display=swap');
 *{
     margin: 0;
@@ -14,7 +13,7 @@ header{
     position: absolute;
     top: 0;
     left: 0;
-    background: rgb(210, 228, 245);
+    background-color: rgb(255, 255, 255);
 }
 
 /*HEADER SUPERIOR*/
@@ -41,7 +40,7 @@ header{
 
 .container__menu{
     width: 100%;
-    height: 70px;
+    height: 105px;
     padding: 70px;
    
     background: #023877;
@@ -88,7 +87,7 @@ nav > ul > li > a{
     display: flex;
     align-items: center;
     padding: 14px;
-    color: rgb(210, 228, 245);
+    color: rgb(255, 255, 255);
     text-transform: uppercase;
     font-size: 14px;
     transition: all 300ms ease;
@@ -112,7 +111,7 @@ nav ul li ul{
     width: 200px;
     display: flex;
     flex-direction: column;
-    background: rgb(210, 228, 245);
+    background: rgb(234, 245, 255);
     position: absolute;
     top: 90px;
     left: -5px;
@@ -184,7 +183,7 @@ nav ul li ul li a:hover{
 
     .icon__menu{
         font-size: 26px;
-        color: rgb(210, 228, 245);
+        color: rgb(0, 0, 0);
         cursor: pointer;
         width: 26px;
         height: 100%;
@@ -287,9 +286,7 @@ aside#der{
     
 }
 
-.container {
-  background-color: rgb(210, 228, 245); /* Cambia el color de fondo */
-}
+
 
 .header {
   background-color: rgb(210, 228, 245); /* Cambia el color de fondo del encabezado */
@@ -297,4 +294,18 @@ aside#der{
 
 .header__superior {
   color: #333333; /* Cambia el color del texto del encabezado */
+}
+
+/* estilos.css */
+
+body {
+    background-color: rgb(210, 228, 245); /* Cambia este valor al color gris que deseas para el fondo general */
+}
+
+.carousel-item {
+    background-color: rgb(210, 228, 245); /* Cambia este valor al color gris que deseas para el fondo del carrusel */
+}
+
+.container {
+    padding-top: 30px;
 }

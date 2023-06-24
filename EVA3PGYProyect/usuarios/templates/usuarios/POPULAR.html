@@ -1,9 +1,9 @@
-{% load static%}
+{% load static %}
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>CAOS NEWS  PUPOLAR</title>
+    <title>CAOS NEWS POPULAR</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -53,33 +53,19 @@
             <div class="col-md-8">
                 <form method="post">
                     {% csrf_token %}
-                    <pre>Título:        <input type="text" name="titulo"></pre>
-                    <pre>Autor:   <input type="text" name="autor"></pre>
-                    {{ categoria_formulario.as_p }}
-                    <select name="categorias" multiple>
-                        {% for categoria in categorias %}
-                        <option value="{{ categoria.idCategoria }}">{{ categoria.nombre }}</option>
-                        {{ categoria_formulario.as_p }}
-                        {% endfor %}
-                    </select>
-                    <pre>Contenido:     <input type="text" name="contenido"></pre>
-                    <div>
-                        <button>
-                            Registro
-                        </button>
-                    </div>
+                    
                     <div>
                         {% for public in publicaciones %}
 
-                        <li>{{public.titulo}}</li>
-                        <li>{{public.contenido}}</li>
-                        <li>{{public.autor}}</li>
-                        <li>{{public.imagen}}</li>
-                           
+                            <h1>{{public.titulo}}</h1>
+                            <p>{{public.autor}}</p> 
+                            <p>{{public.contenido}}</p>
+                            <img src="{% static  'img/{{public.imagen}}' %}" alt="">
+                            
                         {% endfor %}
                     </div>
                             
-                        <p>No hay publicaciones disponibles.</p>
+                       
                     
                 </form>
                 <!--

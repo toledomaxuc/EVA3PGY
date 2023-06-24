@@ -98,6 +98,17 @@ def publicacion(request):
     publicacion = Publicacion.objects.all()
     return render(request, 'usuarios/POPULAR.html', {'publicaciones' : publicacion})
 
+def publicacionPolitica(request):
+    context = {}
+    if request.user.is_authenticated:
+        context["username"] = request.user.username
+    categorias = Categoria.objects.all()
+    context["categorias"] = categorias
+    estado = Publicacion.objects.filter(idUsuario=request.user)
+    context["publicaciones"] = estado
+    publicacion = Publicacion.objects.all()
+    return render(request, 'usuarios/POLITICA.html', {'publicaciones' : publicacion})
+
 @login_required
 def crear_publicacion(request):
     context = {}
@@ -152,10 +163,8 @@ def editPublicacion(request, idPublicacion):
 
 
 def POLITICA(request):
-    context={}
-    
-
-    return render(request, 'usuarios/POLITICA.html', context)
+    publicacion = Publicacion.objects.all()
+    return render(request, 'usuarios/POLITICA.html', {'publicaciones' : publicacion})
 
 def POPULAR(request):
     
@@ -170,7 +179,7 @@ def Formulario(request):
     context={} 
     return render(request, 'usuarios/Formulario.html' , context)
 
-def agregar(request):
+def categoria(request):
     context={} 
     return render(request, 'usuarios/agregar.html' , context)
 

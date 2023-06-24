@@ -1,0 +1,21 @@
+{% extends 'usuarios/base.html' %}
+{% load static %}
+{% block cuerpo %}
+<div class="container-fluid">
+  <h1>Index Publicación</h1>
+  <div>
+    <a href="{% url 'crear_publicacion' %}">Agregar</a>
+  </div>
+  {% if articulos %}
+    <table>
+    {% for articulo in articulos %}
+      <tr>
+        <td>{{articulo.articulo}}</td>
+        <td>{{articulo.estado.estado}}</td>
+        <td><a href="{% url 'editPublicacion' publicacion.idPublicacion%}">Editar</a></td>
+      </tr>
+    {% endfor%}
+    </table>
+  {% endif %}
+</div>
+{% endblock %}

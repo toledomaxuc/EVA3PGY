@@ -1,16 +1,20 @@
 from django import forms
-from .models import NuevoUsuario
-
+from .models import NuevoUsuario, Publicacion, Categoria
+from django.db import models
 from django.forms import ModelForm
 
-class usuarioForm(ModelForm):
+  
+
+class PublicacionForm(forms.ModelForm):
     class Meta:
-        model = NuevoUsuario
-        fields = ("nombre",
-                  "apellido_paterno",
-                  "apellido_materno",
-                  "email",
-                  "fecha_nacimiento",
-                  "telefono",
-                  "direccion",
-                  "contrasena")
+        model = Publicacion
+        exclude = ('idUsuario',)
+        fields = ["titulo","autor","contenido","categorias","imagen",]
+        widgets = {
+            'categorias': forms.TextInput(attrs={'type': 'hidden'}),
+        }
+
+class CategoriaForm(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = ['categoria']

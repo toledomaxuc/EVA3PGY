@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from .models import NuevoUsuario
+from .models import NuevoUsuario, Publicacion, Categoria
 from django.contrib.auth import login, logout, authenticate
+from .forms import PublicacionForm, CategoriaForm
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -44,10 +47,8 @@ def registro(request):
                                             direccion=direccion,
                                             contrasena=contrasena,                                  
                                             activo=1)
-                #lo tira a la base de datos con .save()
                 objeto.save()
-                login(request, objeto)
-                #y vuelve a registro.html donde muestra el "error" de usuario creado
+                login(request, objeto)            
                 return render (request, 'usuarios/registro.html',{
                     'form': UserCreationForm,
                     "error": 'usuario creado'
@@ -63,20 +64,16 @@ def registro(request):
                 })
 
 def cerrarSesion(request):
-    #cierre de sesion con import logout
     logout(request)
     return redirect(index)
 
 def iniciarSesion(request): 
-    #inicio de sesion con metodo post, donde solicita username(correo) y password
     if request.method == 'POST':
         username = request.POST.get('email')
         password = request.POST.get('contrasena')
 
-        #se autentica que los valores correspondan a los de la BD y se pasa a la variable "user"
         user = authenticate(request, username=username, password=password)
         print("login exitoso")
-        #si el usuario esta vacio, solicita neuvamente el usuario
         if user is not None:
             login(request, user)
             return redirect(index)
@@ -89,13 +86,81 @@ def iniciarSesion(request):
         'error_message': error_message,
     })
 
+
+def publicacion(request):
+    context = {}
+    if request.user.is_authenticated:
+        context["username"] = request.user.username
+    categorias = Categoria.objects.all()
+    context["categorias"] = categorias
+    estado = Publicacion.objects.filter(idUsuario=request.user)
+    context["publicaciones"] = estado
+    publicacion = Publicacion.objects.all()
+    return render(request, 'usuarios/POPULAR.html', {'publicaciones' : publicacion})
+
+@login_required
+def crear_publicacion(request):
+    context = {}
+    if request.user.is_authenticated:
+        context["username"] = request.user.username
+        if request.method == "POST":
+            estado = Categoria.objects.get(idCategoria='1')
+            form = PublicacionForm(request.POST, request.FILES)
+            categoria_form = CategoriaForm(request.POST)
+            if form.is_valid() and categoria_form.is_valid():
+                publicacion = form.save(commit=False)
+                publicacion.idUsuario = request.user
+                publicacion.save()
+
+                categoria = categoria_form.cleaned_data['categoria']
+                publicacion.categorias.add(categoria)
+                return redirect('publicacion')
+            else:
+                print(form.errors)
+                print(categoria_form.errors)
+        else:
+            form = PublicacionForm()
+            categoria_form = CategoriaForm()
+        context["formulario"] = form
+        context["categoria_formulario"] = categoria_form
+    return render(request, "usuarios/agregar.html", {
+        'formPub' : PublicacionForm
+    })
+
+def crear_categoria(request):
+    context = {}
+    if request.user.is_authenticated:
+        context["username"] = request.user.username
+        if request.method == "POST":
+            form = CategoriaForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect(publicacion)
+            else:
+                print(form.errors)
+        else:
+            form = CategoriaForm()
+        context["form"] = form
+    return render(request, "usuarios/agregar_categoria.html", context)
+
+
+@login_required
+def editPublicacion(request, idPublicacion):
+    return redirect(publicacion)
+
+
+
+
 def POLITICA(request):
-    context={} 
+    context={}
+    
+
     return render(request, 'usuarios/POLITICA.html', context)
 
 def POPULAR(request):
-    context={} 
-    return render(request, 'usuarios/POPULAR.html' , context)
+    
+    publicacion = Publicacion.objects.all()
+    return render(request, 'usuarios/POPULAR.html', {'publicaciones' : publicacion})
 
 def DEPORTE(request):
     context={} 
@@ -104,4 +169,12 @@ def DEPORTE(request):
 def Formulario(request):
     context={} 
     return render(request, 'usuarios/Formulario.html' , context)
+
+def agregar(request):
+    context={} 
+    return render(request, 'usuarios/agregar.html' , context)
+
+
+    
+
 

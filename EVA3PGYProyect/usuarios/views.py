@@ -8,6 +8,7 @@ from django.views.generic import ListView
 from .models import Noticia
 from django.db.models import Q
 from django.views.generic import TemplateView
+from .forms import NoticiaForm
 # Create your views here.
 
 def index(request):
@@ -153,6 +154,12 @@ def buscar(request):
         return redirect('POLITICA')
     elif query_lower == 'popular':
         return redirect('POPULAR')
+    elif query_lower == 'maria' or query_lower == 'maria plaza':
+        return redirect('POPULAR')
+    elif query_lower == 'isabel' or query_lower == 'isabel caro':
+        return redirect('POLITICA')
+    elif query_lower == 'cesar' or query_lower == 'cesar vasquez':
+        return redirect('DEPORTE')
     else:
         resultados = Noticia.objects.filter(
             Q(periodista__icontains=query) |
@@ -160,3 +167,32 @@ def buscar(request):
             Q(palabra_clave__icontains=query)
         )
         return render(request, 'usuarios/resultados_busqueda.html', {'resultados': resultados, 'query': query})
+    
+
+#CRUD
+# 
+def ingresar_noticia(request):
+    if request.method == 'POST':
+        form = NoticiaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = NoticiaForm()
+    
+    context = {'form': form}
+    return render(request, 'usuarios/ingresar_noticia.html', context)
+
+def editar_noticia(request, noticia_id):
+    noticia = Noticia.objects.get(id=noticia_id)
+    
+    if request.method == 'POST':
+        form = NoticiaForm(request.POST, request.FILES, instance=noticia)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = NoticiaForm(instance=noticia)
+    
+    context = {'form': form}
+    return render(request, 'usuarios/editar_noticia.html', context)    

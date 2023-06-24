@@ -1,6 +1,6 @@
 from django import forms
 from .models import NuevoUsuario
-
+from .models import Noticia
 from django.forms import ModelForm
 
 class usuarioForm(ModelForm):
@@ -14,3 +14,9 @@ class usuarioForm(ModelForm):
                   "telefono",
                   "direccion",
                   "contrasena")
+        
+
+class NoticiaForm(forms.ModelForm):
+    class Meta:
+        model = Noticia
+        fields = ['titulo', 'contenido', 'imagen']        

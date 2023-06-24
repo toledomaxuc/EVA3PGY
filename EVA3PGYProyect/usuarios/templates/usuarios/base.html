@@ -37,7 +37,10 @@
                         {% endif %}
                     </aside>
                     <div class="search">
-                        <input type="search" placeholder="¿Qué deseas buscar?">
+                        <form action="{% url 'resultados_busqueda' %}" method="get">
+                            <input type="text" name="query" placeholder="Buscar...">
+                            <button type="submit">Buscar</button>
+                        </form>
                     </div>
                 </div>
 

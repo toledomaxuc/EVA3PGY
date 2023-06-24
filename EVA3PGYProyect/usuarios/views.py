@@ -4,7 +4,10 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from .models import NuevoUsuario
 from django.contrib.auth import login, logout, authenticate
-
+from django.views.generic import ListView
+from .models import Noticia
+from django.db.models import Q
+from django.views.generic import TemplateView
 # Create your views here.
 
 def index(request):
@@ -89,17 +92,14 @@ def iniciarSesion(request):
         'error_message': error_message,
     })
 
-def POLITICA(request):
-    context={} 
-    return render(request, 'usuarios/POLITICA.html', context)
+class PoliticaView(TemplateView):
+    template_name = 'usuarios/POLITICA.html'
 
-def POPULAR(request):
-    context={} 
-    return render(request, 'usuarios/POPULAR.html' , context)
+class PopularView(TemplateView):
+    template_name = 'usuarios/POPULAR.html'
 
-def DEPORTE(request):
-    context={} 
-    return render(request, 'usuarios/DEPORTE.html', context)
+class DeporteView(TemplateView):
+    template_name = 'usuarios/DEPORTE.html'
 
 def Formulario(request):
     context={} 
@@ -109,3 +109,54 @@ def categoria(request):
     context={} 
     return render(request, 'usuarios/categoria.html' , context)
 
+
+class PoliticaView(TemplateView):
+    template_name = 'usuarios/POLITICA.html'
+
+class PopularView(TemplateView):
+    template_name = 'usuarios/POPULAR.html'
+
+class DeporteView(TemplateView):
+    template_name = 'usuarios/DEPORTE.html'
+
+class BuscarNoticias(ListView):
+    model = Noticia
+    template_name = 'usuarios/resultados_busqueda.html'
+    context_object_name = 'resultados'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        queryset = super().get_queryset()
+
+        if query:
+            queryset = queryset.filter(
+                Q(periodista__icontains=query) |
+                Q(categoria__icontains=query) |
+                Q(palabra_clave__icontains=query)
+            )
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('query')
+        return context
+
+
+def buscar(request):
+    query = request.GET.get('query')
+    query_lower = query.lower()
+
+    if query_lower == 'deporte':
+        return redirect('DEPORTE')
+    elif query_lower == 'politica':
+        return redirect('POLITICA')
+    elif query_lower == 'popular':
+        return redirect('POPULAR')
+    else:
+        resultados = Noticia.objects.filter(
+            Q(periodista__icontains=query) |
+            Q(categoria__icontains=query) |
+            Q(palabra_clave__icontains=query)
+        )
+        return render(request, 'usuarios/resultados_busqueda.html', {'resultados': resultados, 'query': query})

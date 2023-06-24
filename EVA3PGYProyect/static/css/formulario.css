@@ -1,26 +1,9 @@
-.Formulario-container {
-    margin-top:170px; /* Ajusta este valor según el espaciado deseado */
-    max-width: 100%;
-    margin:  auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    background-color: rgb(210, 228, 245);
-  
+body {
+    background-color: rgb(210, 228, 245); 
+    overflow-x: hidden;
+    margin-top: 200px;
+    
   }
-  
-  
-  input.form-control {
-    width:600px;
-    font-size: 14px;
-    padding: 1px;
-    margin-bottom: 0px;
-   
-  }
-  
-  .container{
-    background-color: rgb(210, 228, 245);
-    padding-top: 110px;
-  }
+
+
 

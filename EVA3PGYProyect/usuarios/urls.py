@@ -14,4 +14,5 @@ urlpatterns = [
     path('Formulario', views.Formulario, name='Formulario'),
     path('index/', views.cerrarSesion, name='cerrarSesion'),
     path('perfil/', views.iniciarSesion, name='iniciarSesion'),
+    path('categoria', views.categoria, name='categoria'),
 ]

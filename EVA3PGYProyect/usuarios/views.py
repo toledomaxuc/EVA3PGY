@@ -105,3 +105,7 @@ def Formulario(request):
     context={} 
     return render(request, 'usuarios/Formulario.html' , context)
 
+def categoria(request):
+    context={} 
+    return render(request, 'usuarios/categoria.html' , context)
+

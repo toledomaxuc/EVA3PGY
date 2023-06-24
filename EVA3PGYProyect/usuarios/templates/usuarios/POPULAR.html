@@ -1,4 +1,4 @@
-{% load static %}
+{% load static%}
 <!DOCTYPE html>
 <html>
 
@@ -53,7 +53,21 @@
             <div class="col-md-8">
                 <form method="post">
                     {% csrf_token %}
-                    
+                    <pre>Título:        <input type="text" name="titulo"></pre>
+                    <pre>Autor:   <input type="text" name="autor"></pre>
+                    {{ categoria_formulario.as_p }}
+                    <select name="categorias" multiple>
+                        {% for categoria in categorias %}
+                        <option value="{{ categoria.idCategoria }}">{{ categoria.nombre }}</option>
+                        {{ categoria_formulario.as_p }}
+                        {% endfor %}
+                    </select>
+                    <pre>Contenido:     <input type="text" name="contenido"></pre>
+                    <div>
+                        <button>
+                            Registro
+                        </button>
+                    </div>
                     <div>
                         {% for public in publicaciones %}
 

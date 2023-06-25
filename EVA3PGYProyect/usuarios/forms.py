@@ -1,6 +1,10 @@
 from django import forms
 from .models import NuevoUsuario
+<<<<<<< HEAD
 
+=======
+from .models import Noticia
+>>>>>>> origin/MAX3
 from django.forms import ModelForm
 
 class usuarioForm(ModelForm):
@@ -13,4 +17,14 @@ class usuarioForm(ModelForm):
                   "fecha_nacimiento",
                   "telefono",
                   "direccion",
+<<<<<<< HEAD
                   "contrasena")
+=======
+                  "contrasena")
+        
+
+class NoticiaForm(forms.ModelForm):
+    class Meta:
+        model = Noticia
+        fields = ['titulo', 'contenido', 'imagen']        
+>>>>>>> origin/MAX3

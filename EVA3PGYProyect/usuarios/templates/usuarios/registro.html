@@ -1,4 +1,5 @@
 {% extends 'usuarios/base.html' %}
+<<<<<<< HEAD
 {% load static%}
 <!DOCTYPE html>
 <html>
@@ -78,6 +79,81 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Registrar</button>
                 <button type="reset" class="btn btn-primary">Limpiar campos</button> -->
+=======
+{% load static %}
+
+{% block content %}
+<div class="registro-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Registro</h1>
+                <form action="{% url 'registro' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="paterno">Apellido Paterno:</label>
+                        <input type="text" class="form-control" id="paterno" name="paterno" placeholder="Ingrese su apellido paterno">
+                    </div>
+                    <div class="form-group">
+                        <label for="materno">Apellido Materno:</label>
+                        <input type="text" class="form-control" id="materno" name="materno" placeholder="Ingrese su apellido materno">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" >
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaNac">Fecha de nacimiento:</label>
+                        <input type="text" class="form-control" id="fechaNac" name="fechaNac" placeholder="Ingrese su fecha de nacimiento YYYY/MM/DD">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono:</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese su telefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección:</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese su direccion">
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">Contraseña:</label>
+                        <input type="password" class="form-control" id="password1" name="password1"placeholder="Cree una contraseña, debe tener una mayuscula, numero y caracter especial (@$#%)">
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Repita contraseña:</label>
+                        <input type="password" class="form-control" id="password2" name="password2" placeholder="Ingrese nuevamente su contraseña">
+                    </div>
+                    <div class="text-danger">
+                        {{ error }}
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-registro">Registro</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/registro.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("input[type='email']").blur(function(){
+                if($(this).val() === ""){
+                    $(this).next("span").show();
+                } else {
+                    $(this).next("span").hide();
+                }
+            });
+            // Otros scripts de validación aquí
+        });
+    </script>
+
+>>>>>>> origin/MAX3
     </form>
             <script type="text/javascript">
                 $(document).ready(function(){
@@ -157,5 +233,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
     integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
     crossorigin="anonymous"></script>
+<<<<<<< HEAD
+=======
+    <link rel="stylesheet" href="{% static 'css/registros.css'%}">
+    <script src="{% static 'js/registro.js' %}"></script>
+
+>>>>>>> origin/MAX3
 {% endblock %}
 </html>

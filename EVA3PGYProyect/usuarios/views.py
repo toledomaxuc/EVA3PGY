@@ -4,7 +4,15 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from .models import NuevoUsuario
 from django.contrib.auth import login, logout, authenticate
+<<<<<<< HEAD
 
+=======
+from django.views.generic import ListView
+from .models import Noticia
+from django.db.models import Q
+from django.views.generic import TemplateView
+from .forms import NoticiaForm
+>>>>>>> origin/MAX3
 # Create your views here.
 
 def index(request):
@@ -61,6 +69,36 @@ def registro(request):
                     'form': UserCreationForm,
                     "error": 'Las contraseñas no coinciden'
                 })
+<<<<<<< HEAD
+
+def cerrarSesion(request):
+    #cierre de sesion con import logout
+    logout(request)
+    return redirect(index)
+
+def iniciarSesion(request): 
+    #inicio de sesion con metodo post, donde solicita username(correo) y password
+    if request.method == 'POST':
+        username = request.POST.get('email')
+        password = request.POST.get('contrasena')
+
+        #se autentica que los valores correspondan a los de la BD y se pasa a la variable "user"
+        user = authenticate(request, username=username, password=password)
+        print("login exitoso")
+        #si el usuario esta vacio, solicita neuvamente el usuario
+        if user is not None:
+            login(request, user)
+            return redirect(index)
+        else:
+            error_message = "Credenciales inválidas. Inténtalo de nuevo."
+    else:
+        error_message = None
+
+    return render(request, 'usuarios/perfil.html', {
+        'error_message': error_message,
+    })
+=======
+>>>>>>> origin/MAX3
 
 def cerrarSesion(request):
     #cierre de sesion con import logout
@@ -89,19 +127,106 @@ def iniciarSesion(request):
         'error_message': error_message,
     })
 
-def POLITICA(request):
-    context={} 
-    return render(request, 'usuarios/POLITICA.html', context)
+class PoliticaView(TemplateView):
+    template_name = 'usuarios/POLITICA.html'
 
-def POPULAR(request):
-    context={} 
-    return render(request, 'usuarios/POPULAR.html' , context)
+class PopularView(TemplateView):
+    template_name = 'usuarios/POPULAR.html'
 
-def DEPORTE(request):
-    context={} 
-    return render(request, 'usuarios/DEPORTE.html', context)
+class DeporteView(TemplateView):
+    template_name = 'usuarios/DEPORTE.html'
 
 def Formulario(request):
     context={} 
     return render(request, 'usuarios/Formulario.html' , context)
 
+def categoria(request):
+    context={} 
+    return render(request, 'usuarios/categoria.html' , context)
+
+
+class PoliticaView(TemplateView):
+    template_name = 'usuarios/POLITICA.html'
+
+class PopularView(TemplateView):
+    template_name = 'usuarios/POPULAR.html'
+
+class DeporteView(TemplateView):
+    template_name = 'usuarios/DEPORTE.html'
+
+class BuscarNoticias(ListView):
+    model = Noticia
+    template_name = 'usuarios/resultados_busqueda.html'
+    context_object_name = 'resultados'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        queryset = super().get_queryset()
+
+        if query:
+            queryset = queryset.filter(
+                Q(periodista__icontains=query) |
+                Q(categoria__icontains=query) |
+                Q(palabra_clave__icontains=query)
+            )
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('query')
+        return context
+
+
+def buscar(request):
+    query = request.GET.get('query')
+    query_lower = query.lower()
+
+    if query_lower == 'deporte':
+        return redirect('DEPORTE')
+    elif query_lower == 'politica':
+        return redirect('POLITICA')
+    elif query_lower == 'popular':
+        return redirect('POPULAR')
+    elif query_lower == 'maria' or query_lower == 'maria plaza':
+        return redirect('POPULAR')
+    elif query_lower == 'isabel' or query_lower == 'isabel caro':
+        return redirect('POLITICA')
+    elif query_lower == 'cesar' or query_lower == 'cesar vasquez':
+        return redirect('DEPORTE')
+    else:
+        resultados = Noticia.objects.filter(
+            Q(periodista__icontains=query) |
+            Q(categoria__icontains=query) |
+            Q(palabra_clave__icontains=query)
+        )
+        return render(request, 'usuarios/resultados_busqueda.html', {'resultados': resultados, 'query': query})
+    
+
+#CRUD
+# 
+def ingresar_noticia(request):
+    if request.method == 'POST':
+        form = NoticiaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = NoticiaForm()
+    
+    context = {'form': form}
+    return render(request, 'usuarios/ingresar_noticia.html', context)
+
+def editar_noticia(request, noticia_id):
+    noticia = Noticia.objects.get(id=noticia_id)
+    
+    if request.method == 'POST':
+        form = NoticiaForm(request.POST, request.FILES, instance=noticia)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = NoticiaForm(instance=noticia)
+    
+    context = {'form': form}
+    return render(request, 'usuarios/editar_noticia.html', context)    

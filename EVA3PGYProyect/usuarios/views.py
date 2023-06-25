@@ -4,15 +4,12 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from .models import NuevoUsuario
 from django.contrib.auth import login, logout, authenticate
-<<<<<<< HEAD
-
-=======
 from django.views.generic import ListView
 from .models import Noticia
 from django.db.models import Q
 from django.views.generic import TemplateView
 from .forms import NoticiaForm
->>>>>>> origin/MAX3
+
 # Create your views here.
 
 def index(request):
@@ -69,36 +66,6 @@ def registro(request):
                     'form': UserCreationForm,
                     "error": 'Las contraseñas no coinciden'
                 })
-<<<<<<< HEAD
-
-def cerrarSesion(request):
-    #cierre de sesion con import logout
-    logout(request)
-    return redirect(index)
-
-def iniciarSesion(request): 
-    #inicio de sesion con metodo post, donde solicita username(correo) y password
-    if request.method == 'POST':
-        username = request.POST.get('email')
-        password = request.POST.get('contrasena')
-
-        #se autentica que los valores correspondan a los de la BD y se pasa a la variable "user"
-        user = authenticate(request, username=username, password=password)
-        print("login exitoso")
-        #si el usuario esta vacio, solicita neuvamente el usuario
-        if user is not None:
-            login(request, user)
-            return redirect(index)
-        else:
-            error_message = "Credenciales inválidas. Inténtalo de nuevo."
-    else:
-        error_message = None
-
-    return render(request, 'usuarios/perfil.html', {
-        'error_message': error_message,
-    })
-=======
->>>>>>> origin/MAX3
 
 def cerrarSesion(request):
     #cierre de sesion con import logout

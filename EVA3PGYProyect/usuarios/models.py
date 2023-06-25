@@ -14,9 +14,7 @@ class NuevoUsuario(models.Model):
     activo           = models.IntegerField()
 
     def __str__(self):
-<<<<<<< HEAD
-        return str(self.nombre)+" "+str(self.apellido_paterno)
-=======
+
         return str(self.nombre)+" "+str(self.apellido_paterno)
     
 
@@ -45,4 +43,3 @@ class Noticia(models.Model):
     def __str__(self):
         return f'{self.periodista} - {self.categoria}'
     
->>>>>>> origin/MAX3

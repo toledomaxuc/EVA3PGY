@@ -1,51 +1,8 @@
-{% load static%}
-<!DOCTYPE html>
-<html>
+{% extends 'usuarios/base.html' %}
+{% load static %}
 
-<head>
-	<title>NOTICIAS CAOS NEWS DEPORTE</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="{% static 'css/estilosm.css' %}">
-</head>
-
-<body>
-	<div class="container__menu">
-		<div class="menu">
-			<input type="checkbox" id="check__menu">
-			<label id="#label__check" for="check__menu">
-				<i class="fa-solid fa-bars icon__menu"></i>
-			</label>
-			<nav>
-				<ul>
-					<li>
-						<div><img src="https://i.ibb.co/D1kCz8L/logoconfondo.png" class="right" alt="logoconfondo"
-								width="71px" height="71px"></div>
-					</li>
-					<li><a href="{% url 'index' %}" id="">Inicio</a></li>
-					<li><a href="#">Categorias</a>
-						<ul>
-							<li><a href="{% url 'POPULAR' %}">Popular</a></li>
-							<li><a href="{% url 'POLITICA' %}">Política</a></li>
-							<li><a href="{% url 'DEPORTE' %}">Deportes</a></li>
-						</ul>
-					</li>
-					<li><a href="#">Autores</a>
-						<ul>
-							<li><a href="{% url 'POPULAR' %}">María Plaza</a></li>
-							<li><a href="{% url 'POLITICA' %}">Isabel Caro</a></li>
-							<li><a href="{% url 'POLITICA' %}">José Wilson</a></li>
-							<li><a href="{% url 'DEPORTE' %}">César Vásquez</a></li>
-						</ul>
-					</li>
-					<li><a href="{% url 'Formulario' %}">Contactanos</a></li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-	<div class="container">
+{% block content %}
+	<div class="Noticia-container">
 		<div class="row">
 			<div class="col-md-8">
 				<h1>Manchester City y Bayern Múnich animan un partidazo en la Champions League</h1>
@@ -84,6 +41,6 @@
 			</div>
 		</div>
 	</div>
-</body>
+	<link rel="stylesheet" href="{% static 'css/estilosm.css' %}">
+{% endblock %}
 
-</html>

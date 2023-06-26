@@ -13,7 +13,7 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(210, 228, 245);
   padding-top: 3px;
 }
 
@@ -41,11 +41,12 @@ header {
 
 .container__menu {
   width: auto;
-  height: 70px;
-  background: #023877;
+  height: 150px;
+  background-color: #023877;
   padding: 20px;
   padding-bottom: 5px;
   padding-top: 5px;
+  
 }
 
 .menu {
@@ -383,4 +384,19 @@ body {
 .categoria-info p {
   font-size: 16px;
   margin: 0;
+}
+
+
+.periodistas {
+  float: right;
+}
+
+.menu ul li.periodistas {
+  margin-left: 200px; /* Ajusta este valor según sea necesario */
+}
+
+
+.search-container {
+  margin-left: 1400px;
+  margin-top: -70px;
 }

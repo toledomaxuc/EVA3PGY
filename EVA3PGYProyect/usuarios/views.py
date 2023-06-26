@@ -110,6 +110,10 @@ def categoria(request):
     context={} 
     return render(request, 'usuarios/categoria.html' , context)
 
+def periodista(request):
+    context={} 
+    return render(request, 'usuarios/periodista.html', context)
+
 
 class PoliticaView(TemplateView):
     template_name = 'usuarios/POLITICA.html'

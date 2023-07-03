@@ -9,6 +9,7 @@ from .models import Noticia
 from django.db.models import Q
 from django.views.generic import TemplateView
 from .forms import NoticiaForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -200,3 +201,19 @@ def editar_noticia(request, noticia_id):
     
     context = {'form': form}
     return render(request, 'usuarios/editar_noticia.html', context)    
+
+
+@login_required
+def perfil(request):
+    # Obtener los datos del usuario
+    usuario = request.user
+
+    # Pasar los datos del usuario al contexto
+    context = {
+        'nombre': usuario.first_name,
+        'apellido': usuario.last_name,
+        'email': usuario.email
+    }
+
+    return render(request, 'usuarios/perfil.html', context)
+

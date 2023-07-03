@@ -1,20 +1,20 @@
 from django.db import models
-
+from django.db import migrations
 # Create your models here.
 class NuevoUsuario(models.Model):
-    
-    nombre           = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=20)
     apellido_paterno = models.CharField(max_length=20)
     apellido_materno = models.CharField(max_length=20)
-    email            = models.EmailField(unique=True, max_length=100, blank=True, null=True)
-    fecha_nacimiento = models.DateField(blank=False, null=False)    
-    telefono         = models.CharField(max_length=45)
-    direccion        = models.CharField(max_length=50, blank=True, null=True)  
-    contrasena       = models.CharField(max_length=10, blank=True, null=True) 
-    activo           = models.IntegerField()
+    email = models.EmailField(unique=True, max_length=100, blank=True, null=True)
+    fecha_nacimiento = models.DateField(blank=False, null=False)
+    telefono = models.CharField(max_length=45)
+    direccion = models.CharField(max_length=50, blank=True, null=True)
+    contrasena = models.CharField(max_length=10, blank=True, null=True)
+    activo = models.IntegerField(null=True)
 
     def __str__(self):
-        return str(self.nombre)+" "+str(self.apellido_paterno)
+        return str(self.nombre) + " " + str(self.apellido_paterno)
+
     
 
 #buscador
@@ -35,8 +35,8 @@ class Noticia(models.Model):
     periodista = models.CharField(max_length=100, choices=PERIODISTA_CHOICES)
     categoria = models.CharField(max_length=50, choices=CATEGORIA_CHOICES)
     palabra_clave = models.CharField(max_length=50)
-    titulo = models.CharField(max_length=100)
-    contenido = models.TextField()
+    titulo = models.CharField(max_length=100,null=True)
+    contenido = models.TextField(null=True)
     imagen = models.ImageField(upload_to='noticias/', blank=True, null=True)
 
     def __str__(self):

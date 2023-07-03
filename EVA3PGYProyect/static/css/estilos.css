@@ -400,3 +400,7 @@ body {
   margin-left: 1400px;
   margin-top: -70px;
 }
+
+.mt-custom {
+  margin-top: 10rem; /* Ajusta este valor según sea necesario */
+}

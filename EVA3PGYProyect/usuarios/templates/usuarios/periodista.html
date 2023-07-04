@@ -7,7 +7,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    {% if user.is_authenticated or request.session.autenticado %}
+                    {% if user.is_authenticated %}
                         <p>Usted ya ha iniciado sesión. ¿Desea cerrar sesión? <a class="link" href="{% url 'cerrarSesion' %}">Cerrar Sesión</a></p>
                     {% else %}
                         <h3 class="card-title text-center">Iniciar sesión</h3>
